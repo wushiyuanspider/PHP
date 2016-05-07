@@ -9,6 +9,11 @@
 	//$size		每页包含的内容条数
 	//$page		当前页
 	function getResultByPage($table, $size, $page) {
+		//处理非正常当前页
+		global $page;
+		if($page <= 0 || $page == null || !is_numeric($page)) {
+			$page = 1;
+		}
 		$sql = "select * from {$table}";
 		$totalNum = mysql_num_rows(mysql_query($sql));		//数据总数
 		global $totalPage;
